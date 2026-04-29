@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carlos Arena</title>
+    <link rel="icon" sizes="32x32" href="../icon/cropped-logonuevo-32x32.png" type="image/png">
+    <link rel="icon" sizes="192x192" href="../icon/cropped-logonuevo-192x192.png" type="image/png">
+    
+    <style>
+        @import url("../css/_theme.css");
+        body{
+            font-family: var(--primary-font);
+            background-color: var(--white);
+            line-height: 1.6;
+            color: var(--grey-950);
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .perfil-card {
+            background: var(--white);
+            max-width: 900px;
+            display: flex; 
+            align-items: stretch; 
+            overflow: hidden;
+            box-shadow: 0 4px 15px var(--grey-400);
+        }
+
+        .columna-foto {
+            flex: 1; 
+            display: flex;
+            padding-right: 5px;
+            background-color: var(--main-color);
+        }
+
+        .columna-foto img {
+            width: 100%;
+            height: 100%;       
+            object-fit: cover;  
+            object-position: center;
+            display: block;
+            border-bottom-right-radius: 80px;
+        }
+
+        .columna-info {
+            flex: 2; 
+            padding: 40px;
+        }
+
+        h1 {
+            color: var(--main-color);
+            margin-top: 0;
+            font-size: 2.5em;
+        }
+
+        .biografia {
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .tabla-datos {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .tabla-datos td {
+            padding: 4px 0;
+        }
+
+        .etiqueta {
+            font-weight: normal;
+            width: 40%;
+        }
+
+        .valor {
+            font-weight: normal;
+        }
+
+        .destacado {
+            font-weight: bold;
+        }
+
+        .contacto a {
+            color: var(--main-color);
+            text-decoration: underline;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .contacto a:hover {
+            color: var(--accent-color); 
+            text-decoration: underline; 
+        }
+    </style>
+
+</head>
+<body>
+    <header></header>
+    <section>
+        <div class="perfil-card">
+            <div class="columna-foto">
+                <img src="30371074.jpg" alt="Perrito">
+            </div>
+            
+            <div class="columna-info">
+                <h1>Carlos Arena</h1>
+
+                <p class="biografia">
+                    Soy Estudiante de la Facultad de Ciencias cursando el 6to semestre de la Licenciatura de Computaci&oacute;n en la Universidad Central de Venezuela (UCV) y estoy cursando actualmente la materia de Aplicaciones y Tecnolog&iacute;as de Internet 
+                </p>
+                <table class="tabla-datos">
+                <tr>
+                    <td class="etiqueta">Mi color favorito es:</td>
+                    <td class="valor">Azul</td>
+                </tr>
+                <tr>
+                    <td class="etiqueta">Mi libro favorito es:</td>
+                    <td class="valor">El arte de la Guerra</td>
+                </tr>
+                <tr>
+                    <td class="etiqueta">Mi videojuego favorito es:</td>
+                    <td class="valor">Dark souls 1</td>
+                </tr>
+                <tr class="destacado">
+                    <td>Lenguajes de programación aprendidos:</td>
+                    <td>C/C++, Java, Python, JavaScript, Prolog, Haskell</td>
+                </tr>
+            </table>
+
+            <p class="contacto">
+                Si necesitan comunicarse conmigo me pueden escribir a:<br>
+                <a href="mailto:carlosarenaph@gmail.com">carlosarenaph@gmail.com</a>
+            </p>
+
+            </div>
+        </div>
+    </section>
+    <footer></footer>
+    
+</body>
+</html>
