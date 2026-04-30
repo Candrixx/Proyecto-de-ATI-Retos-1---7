@@ -8,96 +8,29 @@
     <link rel="icon" sizes="192x192" href="../icon/cropped-logonuevo-192x192.png" type="image/png">
     
     <style>
-        @import url("../css/_theme.css");
-        body{
-            font-family: var(--primary-font);
-            background-color: var(--white);
-            line-height: 1.6;
-            color: var(--grey-950);
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .perfil-card {
-            background: var(--white);
-            max-width: 900px;
-            display: flex; 
-            align-items: stretch; 
-            overflow: hidden;
-            box-shadow: 0 4px 15px var(--grey-400);
-        }
-
-        .columna-foto {
-            flex: 1; 
-            display: flex;
-            padding-right: 5px;
-            background-color: var(--main-color);
-        }
-
-        .columna-foto img {
-            width: 100%;
-            height: 100%;       
-            object-fit: cover;  
-            object-position: center;
-            display: block;
-            border-bottom-right-radius: 80px;
-        }
-
-        .columna-info {
-            flex: 2; 
-            padding: 40px;
-        }
-
-        h1 {
-            color: var(--main-color);
-            margin-top: 0;
-            font-size: 2.5em;
-        }
-
-        .biografia {
-            font-style: italic;
-            margin-bottom: 30px;
-        }
-
-        .tabla-datos {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .tabla-datos td {
-            padding: 4px 0;
-        }
-
-        .etiqueta {
-            font-weight: normal;
-            width: 40%;
-        }
-
-        .valor {
-            font-weight: normal;
-        }
-
-        .destacado {
-            font-weight: bold;
-        }
-
-        .contacto a {
-            color: var(--main-color);
-            text-decoration: underline;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        .contacto a:hover {
-            color: var(--accent-color); 
-            text-decoration: underline; 
-        }
+        @import url("../css/style.css");
     </style>
 
 </head>
-<body>
-    <header></header>
+<body class="perfil">
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>ATI<span>[UCV]</span>Log</h1>
+            </div>
+            
+            <div class="search-container">
+                <form action="#">
+                    <input type="text" placeholder="Nombre..." name="search">
+                    <button type="submit">Buscar</button>
+                </form>
+            </div>
+
+            <div class="user-icon">
+                <img src="../icon/userIcon.svg" alt="User">
+            </div>
+        </nav>
+    </header>
     <section>
         <div class="perfil-card">
             <div class="columna-foto">
@@ -137,7 +70,9 @@
             </div>
         </div>
     </section>
-    <footer></footer>
+    <footer>
+        <p>Copyright © 2026 Escuela de computación - ATI. Todos los derechos reservados</p>
+    </footer>
     
 </body>
 </html>
