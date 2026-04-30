@@ -258,3 +258,7 @@ h1 {
     color: var(--accent-color); 
     text-decoration: underline; 
 }
+
+.navbar a{
+    text-decoration: none;
+}
