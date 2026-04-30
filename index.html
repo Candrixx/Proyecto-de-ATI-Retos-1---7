@@ -42,6 +42,30 @@
             display: flex;
         }
 
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            width: 100%;
+            padding-top: 30px;
+        }
+
+        
+        .title-section {
+            width: 95%;
+            max-width: 1200px; 
+            margin-bottom: 10px; 
+            text-align: left; 
+        }
+
+        .title-section h2 {
+            font-family: var(--primary-font);
+            font-size: 3rem;
+            color: var(--grey-800); 
+            margin: 0;
+            font-weight: bold;
+        }
+
         .card-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr); 
@@ -157,6 +181,8 @@
             box-sizing: border-box;
         }
 
+
+
     </style>
 </head>
 <body>
@@ -178,7 +204,11 @@
             </div>
         </nav>
     </header>
-    <section>
+    <section class="main-content">
+        <div class="title-section">
+            <h2>Semestre 2026-1</h2>
+        </div>
+
         <div class="card-container">
             <div class="card">
                 <div class="card-header">
