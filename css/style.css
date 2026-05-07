@@ -1,4 +1,5 @@
 @import url(_theme.css);
+
 .index { 
     margin: 0; 
     padding: 0; 
@@ -57,7 +58,7 @@ section {
 
 .card-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 40px; 
     padding: 40px; 
     width: 100%;
@@ -177,6 +178,8 @@ section {
     box-sizing: border-box;
 }
 
+/*Clases de la pagina de perfil*/
+
 .perfil {
     margin: 0; 
     padding: 0; 
@@ -207,7 +210,7 @@ section {
     background-color: var(--main-color);
 }
 
-.columna-foto img {
+.columna-foto picture, .columna-foto img {
     width: 100%;
     height: 100%;       
     object-fit: cover;  
@@ -268,4 +271,60 @@ h1 {
 
 .navbar a{
     text-decoration: none;
+}
+
+.hamburger-menu {
+    display: none; 
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+}
+
+.hamburger-menu span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: var(--white);
+    border-radius: 3px;
+}
+
+
+@media (max-width: 768px) {
+    .search-container, .user-icon {
+        display: none; 
+    }
+
+    .hamburger-menu {
+        display: flex; 
+    }
+
+    .perfil-card {
+        flex-direction: column;
+        width: 100%; 
+        border-radius: 0;
+    }
+
+    .columna-foto {
+        height: 400px; 
+        padding-right: 0;
+        border-bottom-right-radius: 0;
+    }
+    
+}
+
+@media (max-width: 480px) {
+    .title-section h2 {
+        font-size: 2.2rem;
+    }
+
+    .card-container {
+        grid-template-columns: 1fr; 
+        padding: 20px;
+    }
+
+    .tabla-datos {
+        font-size: 0.8rem; 
+    }
 }
