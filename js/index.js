@@ -1,4 +1,27 @@
-function getConfig() {
+async function cargarConfiguracion(idioma) {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        // Asegúrate de que el nombre del archivo coincida (ej: configEN.json)
+        script.src = `conf/config${idioma.toUpperCase()}.json`; 
+        script.onload = () => resolve(); // Cuando el script cargue, 'config' ya existe
+        script.onerror = () => reject(new Error("No se pudo cargar la configuración"));
+        document.head.appendChild(script);
+    });
+}
+
+
+async function getConfig() {
+    const parametrosURL = new URLSearchParams(window.location.search);
+    const idioma = parametrosURL.get('lang') || 'ES';
+
+    try {
+
+        await cargarConfiguracion(idioma);
+        console.log("Configuración cargada:", config);
+
+    } catch (error) {
+        console.error("Error crítico al cargar el archivo perfil.json de la carpeta:", error);
+    }
 
     //PARTE 1 logo, barra de busqueda
     const tituloH1 = document.querySelector('.logo h1');

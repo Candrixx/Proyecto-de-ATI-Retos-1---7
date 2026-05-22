@@ -1,39 +1,19 @@
+async function cargarConfiguracion(idioma) {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        // Asegúrate de que el nombre del archivo coincida (ej: configEN.json)
+        script.src = `conf/config${idioma.toUpperCase()}.json`; 
+        script.onload = () => resolve(); // Cuando el script cargue, 'config' ya existe
+        script.onerror = () => reject(new Error("No se pudo cargar la configuración"));
+        document.head.appendChild(script);
+    });
+}
+
 async function getConfig(){
-    //PARTE 1 logo, barra de busqueda
-    const tituloH1 = document.querySelector('.logo h1');
-    const subTextoSpan = document.querySelector('.logo h1 span');
 
-    if (tituloH1 && subTextoSpan) {
-        subTextoSpan.textContent = config.site[1];
-
-        const textoIzquierdo = config.site[0];
-        const textoDerecho = config.site[2]; 
-
-        
-        tituloH1.textContent = textoIzquierdo;
-        tituloH1.appendChild(subTextoSpan);
-        tituloH1.append(textoDerecho);
-    }
-
-    const inputBusqueda = document.querySelector('.search-container input');
-    if (inputBusqueda) {
-        inputBusqueda.placeholder = config.name + "..."; 
-    }
-
-    const botonBusqueda = document.querySelector('.search-container button');
-    if (botonBusqueda) {
-        botonBusqueda.textContent = config.search;
-    }
-
-    //PARTE 3 copyright
-    const textoCopyright = document.querySelector('footer p');
-    if(textoCopyright){
-        textoCopyright.textContent = config.copyRight;
-    }
-
-    //PARTE 4 obtener la cedula
     const parametrosURL = new URLSearchParams(window.location.search);
     const cedulaSeleccionada = parametrosURL.get('cedula');
+    const idioma = parametrosURL.get('lang') || 'ES';
 
     if (!cedulaSeleccionada) {
         console.error("No se especificó ninguna cédula en la barra de direcciones.");
@@ -41,6 +21,10 @@ async function getConfig(){
     }
 
     try {
+
+        await cargarConfiguracion(idioma);
+        console.log("Configuración cargada:", config);
+        
         const rutaJson = `../${cedulaSeleccionada}/profile.json`;
         const respuesta = await fetch(rutaJson);
         if (!respuesta.ok) {
@@ -130,6 +114,41 @@ async function getConfig(){
     } catch (error) {
         console.error("Error crítico al cargar el archivo perfil.json de la carpeta:", error);
     }
+
+    //PARTE 1 logo, barra de busqueda
+    const tituloH1 = document.querySelector('.logo h1');
+    const subTextoSpan = document.querySelector('.logo h1 span');
+
+    if (tituloH1 && subTextoSpan) {
+        subTextoSpan.textContent = config.site[1];
+
+        const textoIzquierdo = config.site[0];
+        const textoDerecho = config.site[2]; 
+
+        
+        tituloH1.textContent = textoIzquierdo;
+        tituloH1.appendChild(subTextoSpan);
+        tituloH1.append(textoDerecho);
+    }
+
+    const inputBusqueda = document.querySelector('.search-container input');
+    if (inputBusqueda) {
+        inputBusqueda.placeholder = config.name + "..."; 
+    }
+
+    const botonBusqueda = document.querySelector('.search-container button');
+    if (botonBusqueda) {
+        botonBusqueda.textContent = config.search;
+    }
+
+    //PARTE 3 copyright
+    const textoCopyright = document.querySelector('footer p');
+    if(textoCopyright){
+        textoCopyright.textContent = config.copyRight;
+    }
+
+    //PARTE 4 obtener la cedula
+    
 
 }
 
