@@ -137,6 +137,22 @@ async function getConfig() {
             mensajeNoResultados.style.display = 'none'; 
         }
     });
+
+    //Menu desplegable
+    // 1. Seleccionamos el botón de la hamburguesa usando su clase
+    const botonMenu = document.querySelector('.hamburger-menu');
+
+    // 2. Seleccionamos el header 
+    const header = document.querySelector('header'); 
+
+    // 3. Verificamos que el botón exista en la página para evitar errores
+    if (botonMenu) {
+        // 4. Le agregamos el evento de clic
+        botonMenu.addEventListener('click', () => {
+            
+            header.classList.toggle('menu-abierto');
+        });
+    }
 }
 
 getConfig();

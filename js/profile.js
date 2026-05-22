@@ -135,12 +135,7 @@ async function getConfig(){
     if (inputBusqueda) {
         inputBusqueda.placeholder = config.name + "..."; 
         inputBusqueda.addEventListener('input', (evento) => {
-            // Capturamos lo que el usuario acaba de escribir
             const textoEscrito = evento.target.value;
-            
-            // Redirigimos a index.html enviando el texto en la URL para no perderlo
-            // Nota: Si tu profile.html está dentro de una carpeta (ej: /30371074/), 
-            // asegúrate de cambiar "index.html" por "../index.html"
             window.location.href = `index.html?q=${encodeURIComponent(textoEscrito)}`;
         });
     }
@@ -156,7 +151,21 @@ async function getConfig(){
         textoCopyright.textContent = config.copyRight;
     }
 
-    //PARTE 4 obtener la cedula
+    //Menu desplegable
+    // 1. Seleccionamos el botón de la hamburguesa usando su clase
+    const botonMenu = document.querySelector('.hamburger-menu');
+
+    // 2. Seleccionamos el header 
+    const header = document.querySelector('header'); 
+
+    // 3. Verificamos que el botón exista en la página para evitar errores
+    if (botonMenu) {
+        // 4. Le agregamos el evento de clic
+        botonMenu.addEventListener('click', () => {
+            
+            header.classList.toggle('menu-abierto');
+        });
+    }
     
 
 }

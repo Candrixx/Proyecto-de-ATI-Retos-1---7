@@ -119,11 +119,13 @@ section {
 
 .navbar {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between; 
     align-items: center;
     max-width: 95%;
     margin: 0 auto;
     height: 60px;
+    gap: 15px
 }
 
 .logo h1 {
@@ -292,8 +294,83 @@ h1 {
 
 
 @media (max-width: 768px) {
+
+    .navbar {
+        justify-content: space-between;
+        align-items: center;
+        height: 60px;
+        flex-wrap: nowrap;  
+        flex-direction: column;
+        align-items: stretch; 
+    }
+
+    .top-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        border-bottom: 1px solid var(--white);
+    }
+
+    .menu-content {
+        display: none; /* Oculto por defecto */
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    header.menu-abierto .menu-content {
+        display: flex;
+    }
+
+    .search-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 15px;
+        border-bottom: 1px solid var(--white); /* Línea separadora */
+        padding-bottom: 15px;
+    }
+
+    /* Estilo del perfil: icono + texto */
+    .user-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px; /* Espacio entre icono y texto */
+        color: var(--white);
+        font-family: var(--primary-font);
+    }
+
+    .user-row img {
+        height: 40px;
+        width: 40px;
+    }
+
+    
+    header.menu-abierto .navbar {
+        flex-direction: column; 
+        height: auto; /* Permite que el contenedor crezca al abrir el menú */
+        padding-bottom: 20px; 
+    }
+
+    header.menu-abierto .search-container,
+    header.menu-abierto .user-icon {
+        display: flex !important;
+        width: 100%;
+        justify-content: center;
+        margin-top: 15px;
+        order: 10;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start; /* Fuerza a la izquierda */
+        width: auto;
+    }
+
     .search-container, .user-icon {
         display: none; 
+        width: 100%;
     }
 
     .hamburger-menu {
