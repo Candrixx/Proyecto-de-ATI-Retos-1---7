@@ -13,6 +13,7 @@ async function cargarConfiguracion(idioma) {
 async function getConfig() {
     const parametrosURL = new URLSearchParams(window.location.search);
     const idioma = parametrosURL.get('lang') || 'ES';
+    const busquedaPrevia = parametrosURL.get('q');
 
     try {
 
@@ -87,6 +88,54 @@ async function getConfig() {
         });
 
         contenedorPrincipal.appendChild(tarjeta);
+    });
+
+    if (busquedaPrevia) {
+        const inputIndex = document.querySelector('.search-container input');
+        inputIndex.value = busquedaPrevia; // Rellenar la barra
+        
+        const eventoInput = new Event('input');
+        inputIndex.dispatchEvent(eventoInput);
+    }
+    // 1. Seleccionamos los elementos clave
+    const contenedorListado = document.querySelector('.card-container'); 
+    const tarjetasEstudiantes = document.querySelectorAll('.card'); 
+
+    // 2. Creamos el contenedor para el mensaje de "No encontrado"
+    const mensajeNoResultados = document.createElement('p');
+    mensajeNoResultados.className = 'mensaje-error-busqueda';
+    mensajeNoResultados.style.display = 'none'; 
+    mensajeNoResultados.style.textAlign = 'center'; 
+    mensajeNoResultados.style.fontWeight = 'bold'; 
+    contenedorListado.appendChild(mensajeNoResultados); 
+
+    // 3. Escuchamos cada vez que el usuario escribe algo
+    inputBusqueda.addEventListener('input', (evento) => {
+        
+        const query = evento.target.value.toLowerCase().trim();
+        let estudiantesEncontrados = 0;
+
+        // 4. Recorremos cada estudiante
+        tarjetasEstudiantes.forEach(tarjeta => {
+            
+            const nombreEstudiante = tarjeta.querySelector('.card-footer p').textContent.toLowerCase();
+
+            if (nombreEstudiante.includes(query)) {
+                tarjeta.style.display = ''; 
+                estudiantesEncontrados++;   
+            } else {
+                tarjeta.style.display = 'none'; 
+            }
+        });
+
+        // 6. Lógica para mostrar el mensaje de "No hay perfiles..."
+        if (estudiantesEncontrados === 0 && query !== '') {
+            const textoTraducido = config.noResults.replace('[query]', evento.target.value);
+            mensajeNoResultados.textContent = textoTraducido;
+            mensajeNoResultados.style.display = 'block'; 
+        } else {
+            mensajeNoResultados.style.display = 'none'; 
+        }
     });
 }
 

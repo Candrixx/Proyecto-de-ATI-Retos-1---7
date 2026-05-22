@@ -134,6 +134,15 @@ async function getConfig(){
     const inputBusqueda = document.querySelector('.search-container input');
     if (inputBusqueda) {
         inputBusqueda.placeholder = config.name + "..."; 
+        inputBusqueda.addEventListener('input', (evento) => {
+            // Capturamos lo que el usuario acaba de escribir
+            const textoEscrito = evento.target.value;
+            
+            // Redirigimos a index.html enviando el texto en la URL para no perderlo
+            // Nota: Si tu profile.html está dentro de una carpeta (ej: /30371074/), 
+            // asegúrate de cambiar "index.html" por "../index.html"
+            window.location.href = `index.html?q=${encodeURIComponent(textoEscrito)}`;
+        });
     }
 
     const botonBusqueda = document.querySelector('.search-container button');
