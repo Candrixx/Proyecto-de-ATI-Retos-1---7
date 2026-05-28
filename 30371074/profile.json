@@ -4,7 +4,7 @@ const profile = {
 	"color": "Azul",
 	"book": ["El arte de la Guerra - Sun Tzu"],
 	"music": ["Hip Hop", "Rock"],
-	"video_game": ["Dark Souls 1"],
+	"video_game": ["Dark Souls 1", "Bioshock"],
 	"language":["C/C++", "Java", "Python", "JavaScript", "Prolog", "Haskell"],
 	"email":"carlosarenaph@gmail.com",
 	"ci":"30371074",
