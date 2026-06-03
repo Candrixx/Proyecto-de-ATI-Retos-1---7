@@ -49,6 +49,7 @@ async function getConfig(){
             imgFoto.src = rutaImagenBig;
             imgFoto.alt = perfil.name; 
         }
+        
 
         const txtBiografia = document.querySelector('.perfil-card .biografia');
         if (txtBiografia) {
@@ -116,8 +117,8 @@ async function getConfig(){
     }
 
     //PARTE 1 logo, barra de busqueda
-    const tituloH1 = document.querySelector('.logo h1');
-    const subTextoSpan = document.querySelector('.logo h1 span');
+    const tituloH1 = document.querySelector('.logo-h1');
+    const subTextoSpan = document.querySelector('.logo-span');
 
     if (tituloH1 && subTextoSpan) {
         subTextoSpan.textContent = config.site[1];
@@ -131,7 +132,7 @@ async function getConfig(){
         tituloH1.append(textoDerecho);
     }
 
-    const inputBusqueda = document.querySelector('.search-container input');
+    const inputBusqueda = document.querySelector('.search-container-input');
     if (inputBusqueda) {
         inputBusqueda.placeholder = config.name + "..."; 
         inputBusqueda.addEventListener('input', (evento) => {
@@ -140,13 +141,13 @@ async function getConfig(){
         });
     }
 
-    const botonBusqueda = document.querySelector('.search-container button');
+    const botonBusqueda = document.querySelector('.search-container-button');
     if (botonBusqueda) {
         botonBusqueda.textContent = config.search;
     }
 
     //PARTE 3 copyright
-    const textoCopyright = document.querySelector('footer p');
+    const textoCopyright = document.querySelector('.footer-p');
     if(textoCopyright){
         textoCopyright.textContent = config.copyRight;
     }

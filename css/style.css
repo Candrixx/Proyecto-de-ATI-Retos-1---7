@@ -6,14 +6,14 @@
     background-color: var(--grey-100);
 }
 
-header {
+.header {
     width: 100%;
     background-color: var(--main-color);
     padding: 10px 0;
     border-bottom: 2px solid var(--grey-400);
 }
 
-footer {
+.footer {
     border-top: 2px solid var(--grey-400);
     width: 100%;
     text-align: center;
@@ -21,7 +21,7 @@ footer {
     padding: 30px 0;
 }
 
-footer p {
+.footer-p {
     margin: 0;
     color: var(--grey-200);
     font-family: var(--primary-font);
@@ -128,19 +128,19 @@ section {
     gap: 15px
 }
 
-.logo h1 {
+.logo-h1 {
     color: var(--white);
     font-family: var(--primary-font);
     font-size: 2rem;
     margin: 0;
 }
 
-.logo span {
+.logo-span {
     font-size: 1rem;
     vertical-align: middle;
 }
 
-.search-container form {
+.search-container-form {
     display: flex;
     background-color: var(--white);
     border-radius: 25px;
@@ -148,7 +148,7 @@ section {
     width: 450px; 
 }
 
-.search-container input {
+.search-container-input {
     border: none;
     padding: 10px 20px;
     flex-grow: 1;
@@ -156,7 +156,7 @@ section {
     font-family: var(--primary-font);
 }
 
-.search-container button {
+.search-container-button {
     background-color: var(--accent-color); 
     color: var(--white);
     border: none;
@@ -166,7 +166,7 @@ section {
     transition: 0.3s;
 }
 
-.search-container button:hover {
+.search-container-button:hover {
     background-color: var(--accent-color);
 }
 

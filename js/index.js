@@ -1,3 +1,20 @@
+class TarjetaEstudiante {
+    constructor(perfil){
+        this.element = document.createElement('div');
+        console.log("Referencia al objeto -> ", this);
+        this.element.className = 'card';
+        this.element.innerHTML = `
+            <div class="card-header">
+                <img src="${perfil.ci}/${perfil.ci}Big${perfil.image_ext}" alt="${perfil.ci}">
+            </div>
+            <div class="card-footer">
+                <p>${perfil.name}</p>
+            </div>
+            <div class="blue-bar"></div>
+        `;
+    }
+}
+
 async function cargarConfiguracion(idioma) {
     return new Promise((resolve, reject) => {
         const script = document.createElement('script');
@@ -25,8 +42,8 @@ async function getConfig() {
     }
 
     //PARTE 1 logo, barra de busqueda
-    const tituloH1 = document.querySelector('.logo h1');
-    const subTextoSpan = document.querySelector('.logo h1 span');
+    const tituloH1 = document.querySelector('.logo-h1');
+    const subTextoSpan = document.querySelector('.logo-span');
 
     if (tituloH1 && subTextoSpan) {
         subTextoSpan.textContent = config.site[1];
@@ -40,12 +57,12 @@ async function getConfig() {
         tituloH1.append(textoDerecho);
     }
 
-    const inputBusqueda = document.querySelector('.search-container input');
+    const inputBusqueda = document.querySelector('.search-container-input');
     if (inputBusqueda) {
         inputBusqueda.placeholder = config.name + "..."; 
     }
 
-    const botonBusqueda = document.querySelector('.search-container button');
+    const botonBusqueda = document.querySelector('.search-container-button');
     if (botonBusqueda) {
         botonBusqueda.textContent = config.search;
     }
@@ -58,7 +75,7 @@ async function getConfig() {
 
 
     //PARTE 3 copyright
-    const textoCopyright = document.querySelector('footer p');
+    const textoCopyright = document.querySelector('.footer-p');
     if(textoCopyright){
         textoCopyright.textContent = config.copyRight;
     }
@@ -70,28 +87,23 @@ async function getConfig() {
 
     contenedorPrincipal.innerHTML = "";
 
-    profiles.forEach(perfil => {
-        const tarjeta = document.createElement('div');
-        tarjeta.className = 'card';
-        tarjeta.innerHTML = `
-            <div class="card-header">
-                <img src="${perfil.ci}/${perfil.ci}Big${perfil.image_ext}" alt="${perfil.ci}">
-            </div>
-            <div class="card-footer">
-                <p>${perfil.name}</p>
-            </div>
-            <div class="blue-bar"></div>
-        `;
+    const fragmento = document.createDocumentFragment();
 
-        tarjeta.addEventListener('click', () => {
-            window.location.href = `profile.html?cedula=${perfil.ci}`;
+    profiles.forEach(perfil => {
+        const nuevaTarjeta = new TarjetaEstudiante(perfil);
+
+        nuevaTarjeta.element.addEventListener('click', () => {
+            console.log("Dentro del Event Listener ", this);
+            this.location.href = `profile.html?cedula=${perfil.ci}`;
         });
 
-        contenedorPrincipal.appendChild(tarjeta);
+        fragmento.appendChild(nuevaTarjeta.element);
     });
 
+    contenedorPrincipal.appendChild(fragmento);
+
     if (busquedaPrevia) {
-        const inputIndex = document.querySelector('.search-container input');
+        const inputIndex = document.querySelector('.search-container-input');
         inputIndex.value = busquedaPrevia; // Rellenar la barra
         
         const eventoInput = new Event('input');
@@ -154,5 +166,10 @@ async function getConfig() {
         });
     }
 }
+
+function probarThis() {
+    console.log("Dentro de función normal:", this);
+}
+probarThis();
 
 getConfig();
