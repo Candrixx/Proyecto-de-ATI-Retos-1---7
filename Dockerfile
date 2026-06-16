@@ -17,7 +17,7 @@ RUN a2enmod wsgi
 RUN python3 -m venv /opt/venv
 RUN /opt/venv/bin/pip install beaker-py
 
-RUN git clone -b reto-7 https://github.com/TU_USUARIO/TU_REPOSITORIO.git /var/www/html/ATI
+RUN git clone -b reto-7 https://github.com/Candrixx/Proyecto-de-ATI-Retos-1---7.git /var/www/html/ATI
 RUN chown -R www-data:www-data /var/www/html/ATI
 
 RUN echo "WSGIPythonHome /opt/venv\n\
