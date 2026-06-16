@@ -1,43 +1,11 @@
-async function cargarConfiguracion(idioma) {
-    return new Promise((resolve, reject) => {
-        const script = document.createElement('script');
-        // Asegúrate de que el nombre del archivo coincida (ej: configEN.json)
-        script.src = `conf/config${idioma.toUpperCase()}.json`; 
-        script.onload = () => resolve(); // Cuando el script cargue, 'config' ya existe
-        script.onerror = () => reject(new Error("No se pudo cargar la configuración"));
-        document.head.appendChild(script);
-    });
-}
-
-async function getConfig(){
-
-    const parametrosURL = new URLSearchParams(window.location.search);
-    const cedulaSeleccionada = parametrosURL.get('cedula');
-    const idioma = parametrosURL.get('lang') || 'ES';
-
-    if (!cedulaSeleccionada) {
-        console.error("No se especificó ninguna cédula en la barra de direcciones.");
-        return;
-    }
-
+async function renderizarPerfilEnSPA(cedula) {
     try {
 
-        await cargarConfiguracion(idioma);
-        console.log("Configuración cargada:", config);
-        
-        const rutaJson = `../${cedulaSeleccionada}/profile.json`;
+        const config = window.config;
+
+        const rutaJson = `${cedula}/profile.json`;
         const respuesta = await fetch(rutaJson);
-        if (!respuesta.ok) {
-            throw new Error(`HTTP error! status: ${respuesta.status}`);
-        }
-        const textoArchivo = await respuesta.text();
-
-        const inicioJSON = textoArchivo.indexOf('{');
-        const finJSON = textoArchivo.lastIndexOf('}');
-        
-        const textoJSONLimpio = textoArchivo.substring(inicioJSON, finJSON + 1);
-
-        const perfil = JSON.parse(textoJSONLimpio);
+        const perfil = await respuesta.json();
 
         const sourceFoto = document.querySelector('.columna-foto picture source');
         const imgFoto = document.querySelector('.columna-foto picture img');
@@ -47,9 +15,9 @@ async function getConfig(){
             const rutaImagenBig = `../${perfil.ci}/${perfil.ci}Big${perfil.image_ext}`;
             sourceFoto.srcset = rutaImagenSmall;
             imgFoto.src = rutaImagenBig;
-            imgFoto.alt = perfil.name; 
+            imgFoto.alt = perfil.name;
         }
-        
+
 
         const txtBiografia = document.querySelector('.perfil-card .biografia');
         if (txtBiografia) {
@@ -97,7 +65,7 @@ async function getConfig(){
             const filaLenguajes = document.querySelector('tr.destacado');
             if (filaLenguajes && perfil.language) {
                 const celdasLenguajes = filaLenguajes.querySelectorAll('td');
-                
+
                 if (celdasLenguajes.length >= 2) {
                     celdasLenguajes[0].textContent = config.language;
                     celdasLenguajes[1].textContent = perfil.language.join(', ');
@@ -124,9 +92,9 @@ async function getConfig(){
         subTextoSpan.textContent = config.site[1];
 
         const textoIzquierdo = config.site[0];
-        const textoDerecho = config.site[2]; 
+        const textoDerecho = config.site[2];
 
-        
+
         tituloH1.textContent = textoIzquierdo;
         tituloH1.appendChild(subTextoSpan);
         tituloH1.append(textoDerecho);
@@ -134,7 +102,7 @@ async function getConfig(){
 
     const inputBusqueda = document.querySelector('.search-container-input');
     if (inputBusqueda) {
-        inputBusqueda.placeholder = config.name + "..."; 
+        inputBusqueda.placeholder = config.name + "...";
         inputBusqueda.addEventListener('input', (evento) => {
             const textoEscrito = evento.target.value;
             window.location.href = `index.html?q=${encodeURIComponent(textoEscrito)}`;
@@ -148,7 +116,7 @@ async function getConfig(){
 
     //PARTE 3 copyright
     const textoCopyright = document.querySelector('.footer-p');
-    if(textoCopyright){
+    if (textoCopyright) {
         textoCopyright.textContent = config.copyRight;
     }
 
@@ -157,18 +125,16 @@ async function getConfig(){
     const botonMenu = document.querySelector('.hamburger-menu');
 
     // 2. Seleccionamos el header 
-    const header = document.querySelector('header'); 
+    const header = document.querySelector('header');
 
     // 3. Verificamos que el botón exista en la página para evitar errores
     if (botonMenu) {
         // 4. Le agregamos el evento de clic
         botonMenu.addEventListener('click', () => {
-            
+
             header.classList.toggle('menu-abierto');
         });
     }
-    
+
 
 }
-
-getConfig();
