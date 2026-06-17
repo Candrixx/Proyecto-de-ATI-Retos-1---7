@@ -32,7 +32,7 @@ function configurarBusqueda(input, tarjetas, config) {
     input.addEventListener('input', (evento) => {
         const query = evento.target.value.toLowerCase();
         let estudiantesEncontrados = 0;
-        const mensajeNoResultados = document.getElementById('mensaje-no-resultados'); // Asegúrate de tener este elemento en tu HTML
+        const mensajeNoResultados = document.getElementById('mensaje-no-resultados'); 
 
         tarjetas.forEach(tarjeta => {
             const nombreEstudiante = tarjeta.querySelector('.card-footer p').textContent.toLowerCase();
@@ -133,7 +133,7 @@ async function getConfig() {
     const fragmento = document.createDocumentFragment();
 
     try {
-        const respuestaPerfiles = await fetch('data/index.json');
+        const respuestaPerfiles = await fetch('/var/www/html/ATI/data/index.json');
 
         const profiles = await respuestaPerfiles.json();
 
