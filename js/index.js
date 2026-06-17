@@ -17,7 +17,7 @@ class TarjetaEstudiante {
 
 async function cargarEstudiantes() {
     try {
-        const respuesta = await fetch('/var/www/html/ATI/data/index.json'); // Asegúrate que esta ruta exista
+        const respuesta = await fetch('/ATI/data/index.json'); // Asegúrate que esta ruta exista
         const listaEstudiantes = await respuesta.json();
         const contenedor = document.getElementById('contenedor-cartas');
         
