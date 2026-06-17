@@ -148,7 +148,7 @@ async function getConfig() {
     const fragmento = document.createDocumentFragment();
 
     try {
-        const respuestaPerfiles = await fetch('/var/www/html/ATI/data/index.json');
+        const respuestaPerfiles = await fetch('/ATI/data/index.json');
 
         const profiles = await respuestaPerfiles.json();
 
