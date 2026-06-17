@@ -15,6 +15,21 @@ class TarjetaEstudiante {
     }
 }
 
+async function cargarEstudiantes() {
+    try {
+        const respuesta = await fetch('/var/www/html/ATI/data/index.json'); // Asegúrate que esta ruta exista
+        const listaEstudiantes = await respuesta.json();
+        const contenedor = document.getElementById('contenedor-cartas');
+        
+        listaEstudiantes.forEach(estudiante => {
+            const tarjeta = new TarjetaEstudiante(estudiante);
+            contenedor.appendChild(tarjeta.element);
+        });
+    } catch (error) {
+        console.error("Error al cargar los estudiantes:", error);
+    }
+}
+
 async function cargarConfiguracion(idioma) {
     try {
         const langCode = (typeof currentLang !== 'undefined') ? currentLang.toUpperCase() : idioma.toUpperCase();
@@ -226,4 +241,7 @@ function probarThis() {
 }
 probarThis();
 
-getConfig();
+window.onload = () => {
+    cargarEstudiantes();
+    getConfig();
+};
