@@ -78,12 +78,14 @@ function mostrarPerfilSPA(perfil) {
 
     // Llamamos a la lógica que tenías en profile.js
     renderizarPerfilEnSPA(perfil.ci);
+    window.history.pushState({cedula: perfil.ci}, "Perfil", `?cedula=${cedula}`);
 }
 
 // Función para regresar al listado
 function volverAlListado() {
     document.getElementById('perfil-detalle').style.display = 'none';
     document.getElementById('contenedor-cartas').style.display = 'grid';
+    window.history.pushState({}, '', '/ATI/index.py');
 }
 
 async function getConfig() {
@@ -244,4 +246,10 @@ probarThis();
 window.onload = () => {
     cargarEstudiantes();
     getConfig();
+
+    const params = new URLSearchParams(window.location.search);
+    const cedula = params.get('cedula');
+    if (cedula) {
+        renderizarPerfilEnSPA(cedula);
+    }
 };

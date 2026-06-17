@@ -97,6 +97,7 @@ def wsgi_app(environ, start_response):
             </div>
             
             <div id="perfil-detalle" style="display: none;">
+                <button id="btn-volver" onclick="volverAlListado()">← Volver al Índice</button>
                 <section class="perfil-card">
                     <div class="columna-foto">
                         <img id="foto-perfil" src="" alt="Perfil">
