@@ -41,8 +41,8 @@ def wsgi_app(environ, start_response):
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>ATI[UCV]Log 2026-1</title>
-        <link rel="icon" sizes="32x32" href="/icon/cropped-logonuevo-32x32.png" type="image/png">
-        <link rel="icon" sizes="192x192" href="/icon/cropped-logonuevo-192x192.png" type="image/png">
+        <link rel="icon" sizes="32x32" href="/var/www/html/ATI/icon/cropped-logonuevo-32x32.png" type="image/png">
+        <link rel="icon" sizes="192x192" href="/var/www/html/ATI/icon/cropped-logonuevo-192x192.png" type="image/png">
 
         <script>
             const currentLang = '{current_lang}';
@@ -63,7 +63,7 @@ def wsgi_app(environ, start_response):
                         <h1 class="logo-h1"><span class="logo-span"></span></h1>
                     </div>
                     <div class="hamburger-menu">
-                        <img src="../icon/menuIcon.svg" alt="Menu desplegable">
+                        <img src="/var/www/html/ATI/icon/menuIcon.svg" alt="Menu desplegable">
                     </div>
                 </div>
 
