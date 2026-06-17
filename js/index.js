@@ -5,7 +5,7 @@ class TarjetaEstudiante {
         this.element.className = 'card';
         this.element.innerHTML = `
             <div class="card-header">
-                <img src="${perfil.ci}/${perfil.ci}Big${perfil.image_ext}" alt="${perfil.ci}">
+                <img src="/ATI/${perfil.ci}/${perfil.ci}Big${perfil.image_ext}" alt="${perfil.ci}">
             </div>
             <div class="card-footer">
                 <p>${perfil.name}</p>
