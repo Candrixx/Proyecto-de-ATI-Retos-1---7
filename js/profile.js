@@ -3,7 +3,7 @@ async function renderizarPerfilEnSPA(cedula) {
 
         const config = window.config;
 
-        const rutaJson = `${cedula}/profile.json`;
+        const rutaJson = `/ATI/${cedula}/profile.json`;
         const respuesta = await fetch(rutaJson);
         const perfil = await respuesta.json();
 
@@ -11,8 +11,8 @@ async function renderizarPerfilEnSPA(cedula) {
         const imgFoto = document.querySelector('.columna-foto picture img');
 
         if (sourceFoto && imgFoto) {
-            const rutaImagenSmall = `../${perfil.ci}/${perfil.ci}Small${perfil.image_ext}`;
-            const rutaImagenBig = `../${perfil.ci}/${perfil.ci}Big${perfil.image_ext}`;
+            const rutaImagenSmall = `/ATI/${perfil.ci}/${perfil.ci}Small${perfil.image_ext}`;
+            const rutaImagenBig = `/ATI/${perfil.ci}/${perfil.ci}Big${perfil.image_ext}`;
             sourceFoto.srcset = rutaImagenSmall;
             imgFoto.src = rutaImagenBig;
             imgFoto.alt = perfil.name;

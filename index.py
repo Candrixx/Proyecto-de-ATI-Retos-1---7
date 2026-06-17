@@ -102,12 +102,39 @@ def wsgi_app(environ, start_response):
                         <img id="foto-perfil" src="" alt="Perfil">
                     </div>
                     <div class="columna-info">
-                        <h2 id="nombre-perfil"></h2>
-                        <p class="biografia" id="bio-perfil"></p>
-                        <table class="tabla-datos">
-                            <tr><td class="etiqueta">Cédula</td><td class="valor" id="ci-perfil"></td></tr>
-                            <tr><td class="etiqueta">Email</td><td class="valor" id="email-perfil"></td></tr>
-                        </table>
+                        <div class="columna-info">
+
+
+                            <p class="biografia"></p>
+                            <table class="tabla-datos">
+                                <tr>
+                                    <td class="etiqueta"></td>
+                                    <td class="valor"></td>
+                                </tr>
+                                <tr>
+                                    <td class="etiqueta"></td>
+                                    <td class="valor"></td>
+                                </tr>
+                                <tr>
+                                    <td class="etiqueta"></td>
+                                    <td class="valor"></td>
+                                </tr>
+                                <tr>
+                                    <td class="etiqueta"></td>
+                                    <td class="valor"></td>
+                                </tr>
+                                <tr class="destacado">
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+
+                            <p class="contacto">
+                                <br>
+                                <a></a>
+                            </p>
+
+                        </div>
                     </div>
                 </section>
             </div>
