@@ -3,6 +3,7 @@ class TarjetaEstudiante {
         this.element = document.createElement('div');
         console.log("Referencia al objeto -> ", this);
         this.element.className = 'card';
+        this.element.dataset.ci = perfil.ci;
         this.element.innerHTML = `
             <div class="card-header">
                 <img src="/ATI/${perfil.ci}/${perfil.ci}Big${perfil.image_ext}" alt="${perfil.ci}">
@@ -15,20 +16,20 @@ class TarjetaEstudiante {
     }
 }
 
-async function cargarEstudiantes() {
-    try {
-        const respuesta = await fetch('/ATI/data/index.json'); // Asegúrate que esta ruta exista
-        const listaEstudiantes = await respuesta.json();
-        const contenedor = document.getElementById('contenedor-cartas');
+// async function cargarEstudiantes() {
+//     try {
+//         const respuesta = await fetch('/ATI/data/index.json'); // Asegúrate que esta ruta exista
+//         const listaEstudiantes = await respuesta.json();
+//         const contenedor = document.getElementById('contenedor-cartas');
         
-        listaEstudiantes.forEach(estudiante => {
-            const tarjeta = new TarjetaEstudiante(estudiante);
-            contenedor.appendChild(tarjeta.element);
-        });
-    } catch (error) {
-        console.error("Error al cargar los estudiantes:", error);
-    }
-}
+//         listaEstudiantes.forEach(estudiante => {
+//             const tarjeta = new TarjetaEstudiante(estudiante);
+//             contenedor.appendChild(tarjeta.element);
+//         });
+//     } catch (error) {
+//         console.error("Error al cargar los estudiantes:", error);
+//     }
+// }
 
 async function cargarConfiguracion(idioma) {
     try {
@@ -45,6 +46,9 @@ async function cargarConfiguracion(idioma) {
 
 function configurarBusqueda(input, tarjetas, config) {
     input.addEventListener('input', (evento) => {
+        document.getElementById('perfil-detalle').style.display = 'none';
+        document.getElementById('contenedor-cartas').style.display = 'grid';
+        
         const query = evento.target.value.toLowerCase();
         let estudiantesEncontrados = 0;
         const mensajeNoResultados = document.getElementById('mensaje-no-resultados'); 
@@ -70,17 +74,6 @@ function configurarBusqueda(input, tarjetas, config) {
     });
 }
 
-// Función para mostrar el perfil sin recargar la página (Estilo SPA)
-function mostrarPerfilSPA(perfil) {
-    document.getElementById('contenedor-cartas').style.display = 'none';
-    const detalleDiv = document.getElementById('perfil-detalle');
-    detalleDiv.style.display = 'block';
-
-    // Llamamos a la lógica que tenías en profile.js
-    renderizarPerfilEnSPA(perfil.ci);
-    window.history.pushState({cedula: perfil.ci}, "Perfil", `?cedula=${cedula}`);
-}
-
 // Función para regresar al listado
 function volverAlListado() {
     document.getElementById('perfil-detalle').style.display = 'none';
@@ -102,7 +95,7 @@ async function getConfig() {
         console.error("Error crítico al cargar el archivo perfil.json de la carpeta:", error);
     }
 
-    //PARTE 1 logo, barra de busqueda
+    //PARTE 1 logo, barra de busqueda 
     const tituloH1 = document.querySelector('.logo-h1');
     const subTextoSpan = document.querySelector('.logo-span');
 
@@ -156,17 +149,19 @@ async function getConfig() {
 
         profiles.forEach(perfil => {
             const nuevaTarjeta = new TarjetaEstudiante(perfil);
-
-            nuevaTarjeta.element.addEventListener('click', () => {
-                console.log("Clic en estudiante: ", perfil.name);
-
-                mostrarPerfilSPA(perfil);
-            });
-
+            nuevaTarjeta.element.dataset.ci = perfil.ci;
             fragmento.appendChild(nuevaTarjeta.element);
         });
 
         contenedorPrincipal.appendChild(fragmento);
+
+        contenedorPrincipal.addEventListener('click', (evento) => {
+            const tarjeta = evento.target.closest('.card'); 
+            if (tarjeta) {
+                const cedula = tarjeta.dataset.ci; 
+                mostrarPerfilSPA(cedula);
+            }
+        });
 
         const tarjetasEstudiantes = document.querySelectorAll('.card');
         configurarBusqueda(inputBusqueda, tarjetasEstudiantes, config);
@@ -243,8 +238,17 @@ function probarThis() {
 }
 probarThis();
 
+function mostrarPerfilSPA(perfil) {
+    document.getElementById('contenedor-cartas').style.display = 'none';
+    const detalleDiv = document.getElementById('perfil-detalle');
+    detalleDiv.style.display = 'block';
+
+    renderizarPerfilEnSPA(cedula);
+    window.history.pushState({cedula: cedula}, "Perfil", `?cedula=${cedula}`);
+}
+
 window.onload = () => {
-    cargarEstudiantes();
+    // cargarEstudiantes();
     getConfig();
 
     const params = new URLSearchParams(window.location.search);
