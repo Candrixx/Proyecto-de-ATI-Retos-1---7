@@ -238,7 +238,7 @@ function probarThis() {
 }
 probarThis();
 
-function mostrarPerfilSPA(perfil) {
+function mostrarPerfilSPA(cedula) {
     document.getElementById('contenedor-cartas').style.display = 'none';
     const detalleDiv = document.getElementById('perfil-detalle');
     detalleDiv.style.display = 'block';
